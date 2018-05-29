@@ -53,12 +53,15 @@ class Puzzle:
 
         # Starts Solution Search
         s.NewSearch(db)
-        # Finds First Solution
-        s.NextSolution()
-        sol = np.asarray([[np.int64(e[i,j].Value()) for i in range(self.dim)] for j in range(self.dim)], dtype=np.int64)
+        # If finds First Solution
+        if s.NextSolution():
+            sol = np.asarray([[np.int64(e[i,j].Value()) for i in range(self.dim)] for j in range(self.dim)], dtype=np.int64)
+        # If no solution found
+        else:
+            sol = None
         # Ends Search
         s.EndSearch()
-        # returns first solution found
+        # returns first solution found (or None if none found)
         return sol
 
     def __str__(self):
